@@ -7,17 +7,35 @@
 #define SIZE 40
 #define AU_SIZE 20
 
-const double PI  =3.141592653589793238463;
-
 Canvas::Canvas(QWidget *parent) : QWidget(parent) {
     setBackgroundRole(QPalette::Base);
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Canvas::tick);
-    timer->start(100);
+    timer->start(1);
+    InitScene();
 }
 
 void Canvas::tick() {
+    for (int i = 0; i < scene.CountParticles; ++i) {
+        qDebug() << "Direction:";
+        qDebug() << scene.Particles[i].Direction.x << " "
+                 << scene.Particles[i].Direction.y << "\n";
+        qDebug() << "Position:";
+        qDebug() << scene.Particles[i].Position.x << " "
+                 << scene.Particles[i].Position.y << "\n";
+        UpdateParticle(&scene, i);
+    }
+}
+
+void Canvas::InitScene() { scene.AuPosition = {1e-14, 1e2}; }
+
+void Canvas::SpawnParticle() {
+    TPoint dir = RandomDirection();
+    qDebug() << "Spawned with direction:";
+    qDebug() << dir.x << " " << dir.y << "\n";
+    scene.Particles.push_back(TParticle{dir, TPoint{1e-13, 0}});
+    scene.CountParticles++;
 }
 
 Canvas::~Canvas(){};
@@ -38,13 +56,6 @@ void Canvas::paintEvent(QPaintEvent *e) {
     painter.drawEllipse(this->width() / 2, this->height() / 2 - AU_SIZE,
                         SIZE / 2, SIZE / 2);
 }
-
-void Canvas::SpawnParticle() {
-    TPoint dir = RandomDirection();
-    scene.Particles.push_back(TParticle{dir, TPoint{scene.GunPosition, 0}});
-    scene.CountParticles++;
-}
-
 void Canvas::keyPressEvent(QKeyEvent *event) {
     if (event->key() == Qt::Key_Left || event->key() == Qt::Key_A) {
         scene.GunPosition = max(scene.GunPosition - SPEED, -width() / 2);

@@ -1,6 +1,7 @@
+#include "../simulation/simulation.hpp"
 #include "../utils/utils.h"
-#include <QWidget>
 #include <QTimer>
+#include <QWidget>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -20,6 +21,8 @@ class Canvas : public QWidget {
     void tick();
 
   private:
+    void InitScene();
+
     QPixmap pixmap;
     QTimer *timer;
 

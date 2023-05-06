@@ -21,7 +21,7 @@ set(PROJECT_SOURCES
         src/canvas/canvas.h
         src/canvas/canvas.cpp
 
-        src/simulation/simulation.h
+        src/simulation/simulation.hpp
         src/simulation/simulation.cpp
 
         src/utils/utils.h

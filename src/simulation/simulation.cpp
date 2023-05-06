@@ -1,26 +1,65 @@
-#include "./simulation.h"
+#include "./simulation.hpp"
 #include <cmath>
-#include <cstdlib>
+#include <iostream>
 
-Simulation GetSimulation() {
-    Simulation sim;
-    sim.tmp = sim.k * sim.alpha_q * sim.alpha_m;
-    return sim;
+#define LEFT_LIMIT -3e-13
+#define RIGHT_LIMIT 5e-13
+
+double randZeroToOne() { return rand() / (RAND_MAX + 1.); }
+double VectorSize(double x, double y) { return sqrt(x * x + y * y); }
+
+Simulation::Simulation() {
+    h = 0.00001;
+    // Предподсчитываем значение
+    tmp = k * au_q * alpha_q * dt / alpha_m;
+    AurumPosition = TPoint{au_d * -10, 0};
 }
 
-TPoint RandomDirection() {
-    double x = (rand() % 2) * (rand() % 2 == 0 ? -1 : 1);
-    double y = (rand() % 2) * (rand() % 2 == 0 ? -1 : 1);
+bool Simulation::NearAurum(int index) {
+    double x = AurumPosition.x - Positions[index].x;
+    double y = AurumPosition.y - Positions[index].y;
+    double length = VectorSize(x, y);
+    if (length <= 1e-14) {
+        std::cout << "shit\n";
+    }
+    return length <= 1e-10;
+}
+
+TPoint Simulation::RandomDirection() {
+    double x = 0; // randZeroToOne() * (rand() % 2 == 0 ? -1 : 1);
+    double y = 1; // randZeroToOne() * (rand() % 2 == 0 ? -1 : 1);
     return TPoint{x, y};
 }
 
-double VectorSize(double x, double y) { return sqrt(x * x + y * y); }
+void Simulation::Tick() {
+    for (int i = CountParticles; i >= 0; --i) {
+        this->UpdateParticle(i);
+    }
+}
 
-TPoint UpdateParticle(Simulation sim, TPoint point, TPoint au) {
-    TPoint direction;
-    direction.x = sim.tmp * (point.x - au.x) /
-                  pow(VectorSize(point.x - au.x, point.y - au.y), 3);
-    direction.y = sim.tmp * (point.y - au.y) /
-                  pow(VectorSize(point.x - au.x, point.y - au.y), 3);
-    return direction;
+bool Simulation::CheckInLimit(int index) {
+    if (Positions[index].x < LEFT_LIMIT && Positions[index].x >= RIGHT_LIMIT) {
+        return false;
+    }
+    if (Positions[index].y < LEFT_LIMIT && Positions[index].y >= RIGHT_LIMIT) {
+        return false;
+    }
+    return true;
+}
+
+void Simulation::UpdateParticle(int index) {
+    TPoint oldDirection = TPoint{Directions[index].x, Directions[index].y};
+    double vec = pow(VectorSize(Positions[index].x, Positions[index].y), 3);
+
+    Directions[index].x += h * tmp * Positions[index].x / vec;
+    Directions[index].y += h * tmp * Positions[index].y / vec;
+
+    Positions[index].x += (h / 2) * (oldDirection.x + Directions[index].x) * dt;
+    Positions[index].y += (h / 2) * (oldDirection.y + Directions[index].y) * dt;
+
+    if (!CheckInLimit(index)) {
+        Positions.erase(Positions.begin() + index);
+        Directions.erase(Directions.begin() + index);
+        CountParticles--;
+    }
 }
