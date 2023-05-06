@@ -18,6 +18,7 @@ class Simulation {
     Simulation();
     void Tick();
     void UpdateParticle(int index);
+    void AddParticle(double xPosition);
 
     // Позиция пушки (по x) с альфа-частицами
     float GunPosition = 0;

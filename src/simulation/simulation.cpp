@@ -63,3 +63,11 @@ void Simulation::UpdateParticle(int index) {
         CountParticles--;
     }
 }
+
+void Simulation::AddParticle(double xPosition) {
+    TPoint position = TPoint{xPosition, -(10 * au_d)};
+    TPoint direction = TPoint{0, 1e7};
+
+    Directions.push_back(direction);
+    Positions.push_back(position);
+}
