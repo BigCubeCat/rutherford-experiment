@@ -1,6 +1,5 @@
 #include "../simulation/simulation.hpp"
-#include "../utils/utils.h"
-#include <QTimer>
+#include "../utils/utils.hpp"
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE

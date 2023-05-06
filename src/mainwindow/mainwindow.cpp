@@ -1,5 +1,5 @@
-#include "./mainwindow.h"
-#include "../canvas/canvas.h"
+#include "./mainwindow.hpp"
+#include "../canvas/canvas.hpp"
 #include "./ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)

@@ -1,4 +1,4 @@
-#include "../utils/utils.h"
+#include "../utils/utils.hpp"
 #include <cmath>
 
 int max(int a, int b) { return (a > b) ? a : b; }

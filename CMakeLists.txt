@@ -15,16 +15,16 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 set(PROJECT_SOURCES
         src/main.cpp
         src/mainwindow/mainwindow.cpp
-        src/mainwindow/mainwindow.h
+        src/mainwindow/mainwindow.hpp
         src/mainwindow/mainwindow.ui
 
-        src/canvas/canvas.h
+        src/canvas/canvas.hpp
         src/canvas/canvas.cpp
 
         src/simulation/simulation.hpp
         src/simulation/simulation.cpp
 
-        src/utils/utils.h
+        src/utils/utils.hpp
         src/utils/utils.cpp
         res.qrc
         src/assets/au.png

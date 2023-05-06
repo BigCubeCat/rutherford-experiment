@@ -1,4 +1,4 @@
-#include "./canvas.h"
+#include "./canvas.hpp"
 #include <QDebug>
 #include <QKeyEvent>
 #include <QPainter>
