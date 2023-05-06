@@ -9,7 +9,6 @@ double randZeroToOne() { return rand() / (RAND_MAX + 1.); }
 double VectorSize(double x, double y) { return sqrt(x * x + y * y); }
 
 Simulation::Simulation() {
-    h = 0.00001;
     // Предподсчитываем значение
     tmp = k * au_q * alpha_q * dt / alpha_m;
     AurumPosition = TPoint{au_d * -10, 0};
@@ -71,3 +70,5 @@ void Simulation::AddParticle(double xPosition) {
     Directions.push_back(direction);
     Positions.push_back(position);
 }
+
+void Simulation::SetDt(double newDt) { this->dt = newDt; }

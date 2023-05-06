@@ -1,5 +1,4 @@
 #include "./canvas.hpp"
-#include <QDebug>
 #include <QKeyEvent>
 #include <QPainter>
 

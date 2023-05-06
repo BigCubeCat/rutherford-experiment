@@ -13,11 +13,10 @@ class Canvas : public QWidget {
 
   public:
     explicit Canvas(QWidget *parent = nullptr);
-    TScene scene;
     ~Canvas();
+
+    Simulation simulation;
     void SpawnParticle();
-  public slots:
-    void tick();
 
   private:
     void InitScene();

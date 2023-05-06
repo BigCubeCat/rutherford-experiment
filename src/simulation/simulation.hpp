@@ -19,6 +19,7 @@ class Simulation {
     void Tick();
     void UpdateParticle(int index);
     void AddParticle(double xPosition);
+    void SetDt(double dt);
 
     // Позиция пушки (по x) с альфа-частицами
     float GunPosition = 0;
@@ -41,6 +42,6 @@ class Simulation {
     double au_q = 79 * e;
     double au_d = 1e-14;
     double tmp;
-    double h;
-    double dt;
+    double h = 0.00001;
+    double dt = 1e-15;
 };
