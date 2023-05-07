@@ -2,6 +2,8 @@
 -I/usr/include/qt5/
 -I/usr/include/qt6/QtWidgets
 -I/usr/include/qt5/QtWidgets
+-I/usr/include/qt5/QtGui
+-I/usr/include/qt6/QtGui
 -I/usr/include/qt6/QtCharts/qchartglobal.h
 -I/usr/include/qt6/Enginio/enginioclient_global.h
 -I/usr/include/qt6/QtXml/qtxmlglobal.h

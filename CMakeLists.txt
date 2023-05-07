@@ -18,8 +18,8 @@ set(PROJECT_SOURCES
         src/mainwindow/mainwindow.hpp
         src/mainwindow/mainwindow.ui
 
-        src/canvas/canvas.hpp
-        src/canvas/canvas.cpp
+        src/Particle/Particle.hpp
+        src/Particle/Particle.cpp
 
         src/simulation/simulation.hpp
         src/simulation/simulation.cpp

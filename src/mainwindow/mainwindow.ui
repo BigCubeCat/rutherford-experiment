@@ -18,7 +18,11 @@
     <item>
      <layout class="QHBoxLayout" name="mainLayout">
       <item>
-       <layout class="QVBoxLayout" name="canvasLayout"/>
+       <layout class="QVBoxLayout" name="canvasLayout">
+        <item>
+         <widget class="QGraphicsView" name="graphicsView"/>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QWidget" name="verticalWidget" native="true">
@@ -105,6 +109,13 @@
            </property>
           </spacer>
          </item>
+         <item>
+          <widget class="QPushButton" name="addButton">
+           <property name="text">
+            <string>Add Particle</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
@@ -118,7 +129,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>

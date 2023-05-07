@@ -2,6 +2,8 @@
 #include <cmath>
 #include <iostream>
 
+#include <QDebug>
+
 #define LEFT_LIMIT -3e-13
 #define RIGHT_LIMIT 5e-13
 
@@ -31,7 +33,7 @@ TPoint Simulation::RandomDirection() {
 }
 
 void Simulation::Tick() {
-    for (int i = CountParticles; i >= 0; --i) {
+    for (int i = CountParticles - 1; i >= 0; --i) {
         this->UpdateParticle(i);
     }
 }
@@ -69,6 +71,8 @@ void Simulation::AddParticle(double xPosition) {
 
     Directions.push_back(direction);
     Positions.push_back(position);
+
+    CountParticles++;
 }
 
 void Simulation::SetDt(double newDt) { this->dt = newDt; }

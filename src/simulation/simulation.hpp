@@ -17,6 +17,7 @@ class Simulation {
   public:
     Simulation();
     void Tick();
+    void Update();
     void UpdateParticle(int index);
     void AddParticle(double xPosition);
     void SetDt(double dt);
@@ -25,7 +26,7 @@ class Simulation {
     float GunPosition = 0;
 
     // Data about Particles
-    int CountParticles;
+    int CountParticles = 0;
     std::vector<TPoint> Directions;
     std::vector<TPoint> Positions;
     TPoint AurumPosition;
