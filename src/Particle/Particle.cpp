@@ -1,8 +1,14 @@
 #include "Particle.hpp"
 
+#include "../utils/utils.hpp"
+
 #define SIZE 10
 
-Particle::Particle(QObject *parent) : QObject(parent), QGraphicsItem() {}
+Particle::Particle(QObject *parent) : QObject(parent), QGraphicsItem() {
+    this->color[0] = randrange(0, 128);
+    this->color[1] = randrange(0, 255);
+    this->color[2] = randrange(0, 128);
+}
 
 Particle::~Particle() {}
 
@@ -13,7 +19,7 @@ QRectF Particle::boundingRect() const {
 void Particle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                      QWidget *widget) {
     painter->setPen(Qt::black);
-    painter->setBrush(Qt::green);
+    painter->setBrush(QColor(color[0], color[1], color[2]));
     painter->drawEllipse(-SIZE, -SIZE, 2 * SIZE, 2 * SIZE);
     Q_UNUSED(option);
     Q_UNUSED(widget);

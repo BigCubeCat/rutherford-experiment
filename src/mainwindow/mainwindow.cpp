@@ -5,7 +5,7 @@
 #include "./mainwindow.hpp"
 #include "./ui_mainwindow.h"
 
-#define SIZE 10
+#define SIZE 5
 
 static int randomBetween(int low, int high) {
     return (rand() % ((high + 1) - low) + low);

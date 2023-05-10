@@ -13,6 +13,7 @@ class Particle : public QObject, public QGraphicsItem {
   public:
     explicit Particle(QObject *parent = 0);
     ~Particle();
+    int color[3];
 
   private:
     QRectF boundingRect() const;
