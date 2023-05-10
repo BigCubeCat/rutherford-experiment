@@ -14,8 +14,6 @@ class Particle : public QObject, public QGraphicsItem {
     explicit Particle(QObject *parent = 0);
     ~Particle();
 
-  signals:
-
   private:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,

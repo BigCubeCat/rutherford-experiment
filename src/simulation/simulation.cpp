@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iostream>
 
-#include <QDebug>
+#include <QGraphicsScene>
 
 #define LEFT_LIMIT -3e-13
 #define RIGHT_LIMIT 5e-13
@@ -10,10 +10,11 @@
 double randZeroToOne() { return rand() / (RAND_MAX + 1.); }
 double VectorSize(double x, double y) { return sqrt(x * x + y * y); }
 
-Simulation::Simulation() {
+Simulation::Simulation(QGraphicsScene *scene) {
     // Предподсчитываем значение
     tmp = k * au_q * alpha_q * dt / alpha_m;
     AurumPosition = TPoint{au_d * -10, 0};
+    this->scene = scene;
 }
 
 bool Simulation::NearAurum(int index) {
@@ -39,13 +40,22 @@ void Simulation::Tick() {
 }
 
 bool Simulation::CheckInLimit(int index) {
-    if (Positions[index].x < LEFT_LIMIT && Positions[index].x >= RIGHT_LIMIT) {
+    if (Positions[index].x < LEFT_LIMIT || Positions[index].x >= RIGHT_LIMIT) {
         return false;
     }
-    if (Positions[index].y < LEFT_LIMIT && Positions[index].y >= RIGHT_LIMIT) {
+    if (Positions[index].y < LEFT_LIMIT || Positions[index].y >= RIGHT_LIMIT) {
         return false;
     }
     return true;
+}
+
+void Simulation::RemoveParticle(int index) {
+    qDebug() << "REMOVE PARTICLE " << index;
+    scene->removeItem(ParticleItems[index]);
+    ParticleItems.erase(ParticleItems.begin() + index);
+    Positions.erase(Positions.begin() + index);
+    Directions.erase(Directions.begin() + index);
+    CountParticles--;
 }
 
 void Simulation::UpdateParticle(int index) {
@@ -59,18 +69,17 @@ void Simulation::UpdateParticle(int index) {
     Positions[index].y += (h / 2) * (oldDirection.y + Directions[index].y) * dt;
 
     if (!CheckInLimit(index)) {
-        Positions.erase(Positions.begin() + index);
-        Directions.erase(Directions.begin() + index);
-        CountParticles--;
+        RemoveParticle(index);
     }
 }
 
-void Simulation::AddParticle(double xPosition) {
+void Simulation::AddParticle(Particle *particaleItem, double xPosition) {
     TPoint position = TPoint{xPosition, -(10 * au_d)};
     TPoint direction = TPoint{0, 1e7};
 
     Directions.push_back(direction);
     Positions.push_back(position);
+    ParticleItems.push_back(particaleItem);
 
     CountParticles++;
 }

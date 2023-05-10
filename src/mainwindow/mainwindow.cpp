@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::UpdateRender);
-    timer->start(1);
+    timer->start(1000);
 
     this->resize(640, 640);
 
@@ -33,8 +33,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setViewportUpdateMode(
         QGraphicsView::BoundingRectViewportUpdate);
 
+    this->simulation = new Simulation(scene);
+
     Particle *item = new Particle();
-    TIntPoint pnt = ToViewPoint(simulation.AurumPosition);
+    TIntPoint pnt = ToViewPoint(simulation->AurumPosition);
     qDebug() << "Aurum pos" << pnt.x << " " << pnt.y;
     item->setPos(pnt.x, pnt.y);
     scene->addItem(item);
@@ -46,27 +48,26 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 void MainWindow::UpdateRender() {
-    simulation.Tick();
-    for (int i = 0; i < simulation.CountParticles; ++i) {
-        TIntPoint pnt = ToViewPoint(simulation.Positions[i]);
-        qDebug() << "TIntPoint = " << pnt.x << " " << pnt.y;
-        qDebug() << Particles[i]->scale();
-        qDebug() << "shit";
+    simulation->Tick();
+    for (int i = simulation->CountParticles - 1; i >= 0; --i) {
+        TIntPoint pnt = ToViewPoint(simulation->Positions[i]);
+        qDebug() << i << " x: " << simulation->Positions[i].x << " "
+                 << simulation->Positions[i].y;
         Particles[i]->setPos(pnt.x * 10, pnt.y * 10);
     }
 }
 
 void MainWindow::AddParticle() {
-    simulation.AddParticle(0);
     Particle *newParticle = new Particle();
     this->Particles.push_back(newParticle);
     scene->addItem(newParticle);
+    simulation->AddParticle(newParticle, 1e-14);
 }
 
 TIntPoint MainWindow::ToViewPoint(TPoint point) {
     TIntPoint result;
-    result.x = point.x * 1e13;
-    result.y = point.y * 1e13;
+    result.x = point.x * 1e15;
+    result.y = point.y * 1e15;
     return result;
 }
 

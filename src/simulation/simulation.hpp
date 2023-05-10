@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Particle/Particle.hpp"
 #include <vector>
 
 const double pi = 3.141592653589793238463;
@@ -8,18 +9,14 @@ typedef struct Point {
     double x, y;
 } TPoint;
 
-typedef struct ParticleObject {
-    TPoint Direction;
-    TPoint Position;
-} TParticle;
-
 class Simulation {
   public:
-    Simulation();
+    Simulation(QGraphicsScene *scene);
     void Tick();
     void Update();
     void UpdateParticle(int index);
-    void AddParticle(double xPosition);
+    void AddParticle(Particle *particleItem, double xPosition);
+    void RemoveParticle(int index);
     void SetDt(double dt);
 
     // Позиция пушки (по x) с альфа-частицами
@@ -29,12 +26,14 @@ class Simulation {
     int CountParticles = 0;
     std::vector<TPoint> Directions;
     std::vector<TPoint> Positions;
+    std::vector<Particle *> ParticleItems;
     TPoint AurumPosition;
 
   private:
     TPoint RandomDirection();
     bool CheckInLimit(int index);
     bool NearAurum(int index);
+    QGraphicsScene *scene;
 
     double k = 1 / (4 * pi * 8.85e-12);
     double e = 1.6e-19;
@@ -44,5 +43,5 @@ class Simulation {
     double au_d = 1e-14;
     double tmp;
     double h = 0.00001;
-    double dt = 1e-15;
+    double dt = 1e-10;
 };

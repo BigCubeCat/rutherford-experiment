@@ -25,7 +25,7 @@ class MainWindow : public QMainWindow {
   public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    Simulation simulation;
+    Simulation *simulation;
     std::vector<Particle *> Particles;
 
   private:
