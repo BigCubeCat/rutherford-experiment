@@ -4,6 +4,7 @@
 #include "../Particle/Particle.hpp"
 #include "./mainwindow.hpp"
 #include "./ui_mainwindow.h"
+#include "qgraphicsitem.h"
 
 #define SIZE 5
 
@@ -17,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::UpdateRender);
-    timer->start(1000);
+    timer->start(10);
 
     this->resize(640, 640);
 
@@ -25,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     scene = new QGraphicsScene(this); // Init graphics scene
     scene->setItemIndexMethod(QGraphicsScene::NoIndex);
+    scene->setSceneRect(-250, -250, 500, 500);
 
     ui->graphicsView->resize(600, 600);
     ui->graphicsView->setScene(scene);
@@ -39,7 +41,11 @@ MainWindow::MainWindow(QWidget *parent)
     TIntPoint pnt = ToViewPoint(simulation->AurumPosition);
     qDebug() << "Aurum pos" << pnt.x << " " << pnt.y;
     item->setPos(pnt.x, pnt.y);
+    item->color[0] = 128;
+    item->color[1] = 128;
+    item->color[2] = 32;
     scene->addItem(item);
+    Particle *lt = new Particle();
 
     connect(ui->addButton, &QPushButton::clicked, this,
             &MainWindow::AddParticle);
@@ -51,8 +57,7 @@ void MainWindow::UpdateRender() {
     simulation->Tick();
     for (int i = simulation->CountParticles - 1; i >= 0; --i) {
         TIntPoint pnt = ToViewPoint(simulation->Positions[i]);
-        qDebug() << i << " x: " << simulation->Positions[i].x << " "
-                 << simulation->Positions[i].y;
+        qDebug() << i << " x: " << pnt.x << " " << pnt.y;
         Particles[i]->setPos(pnt.x * 10, pnt.y * 10);
     }
 }
@@ -66,8 +71,9 @@ void MainWindow::AddParticle() {
 
 TIntPoint MainWindow::ToViewPoint(TPoint point) {
     TIntPoint result;
-    result.x = point.x * 1e15;
-    result.y = point.y * 1e15;
+    double scale = 5e14;
+    result.x = point.x * scale;
+    result.y = point.y * scale;
     return result;
 }
 

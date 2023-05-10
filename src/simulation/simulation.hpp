@@ -9,6 +9,8 @@ typedef struct Point {
     double x, y;
 } TPoint;
 
+TPoint Normalize(TPoint vector);
+
 class Simulation {
   public:
     Simulation(QGraphicsScene *scene);
@@ -41,7 +43,7 @@ class Simulation {
     double alpha_m = 6.64456e-27;
     double au_q = 79 * e;
     double au_d = 1e-14;
-    double tmp;
-    double h = 0.00001;
     double dt = 1e-10;
+    double tmp = k * au_q * alpha_q * dt / alpha_m;
+    double h = 0.00001;
 };
