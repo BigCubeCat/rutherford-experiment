@@ -11,9 +11,10 @@
 class Particle : public QObject, public QGraphicsItem {
     Q_OBJECT
   public:
-    explicit Particle(QObject *parent = 0);
+    explicit Particle(QObject *parent = 0, bool isAlpha = true);
     ~Particle();
     int color[3];
+    int size;
 
   private:
     QRectF boundingRect() const;

@@ -40,5 +40,7 @@ class MainWindow : public QMainWindow {
     void SpawnParticles();
     void UpdateRender();
     void TogglePaused();
+    void SlotChange();
+    void StreamChange();
 };
 #endif // MAINWINDOW_H

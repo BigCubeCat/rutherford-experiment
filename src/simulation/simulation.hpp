@@ -19,10 +19,11 @@ class Simulation {
     void UpdateParticle(int index);
     void AddParticle(Particle *particleItem);
     void RemoveParticle(int index);
+    int StreamPower = 10; // count particles spawned
+    double slotWidth = 100;
 
     // Data about Particles
     int CountParticles = 0;
-    int StreamPower = 10; // count particles spawned
     std::vector<TPoint> Directions;
     std::vector<TPoint> Positions;
     std::vector<Particle *> ParticleItems;
@@ -32,8 +33,6 @@ class Simulation {
     bool CheckInLimit(int index);
     bool NearAurum(int index);
     QGraphicsScene *scene;
-
-    double slotWidth = 10;
 
     double k = 1 / (4 * pi * 8.85e-12);
     double e = 1.6e-19;
