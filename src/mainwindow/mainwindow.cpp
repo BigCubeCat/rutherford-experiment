@@ -17,13 +17,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     timer = new QTimer(this);
+    spawnTimer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::UpdateRender);
+    connect(spawnTimer, &QTimer::timeout, this, &MainWindow::SpawnParticles);
     timer->start(10);
+    spawnTimer->start(1000);
 
-    this->resize(640, 640);
-
-    // this->setFixedSize(640, 640);
-
+    this->resize(800, 600);
     scene = new QGraphicsScene(this); // Init graphics scene
     scene->setItemIndexMethod(QGraphicsScene::NoIndex);
     scene->setSceneRect(-250, -250, 500, 500);
@@ -48,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
     Particle *lt = new Particle();
 
     connect(ui->addButton, &QPushButton::clicked, this,
-            &MainWindow::AddParticle);
+            &MainWindow::TogglePaused);
 
     this->setWindowTitle(tr("Опыт Резерфорда"));
 }
@@ -62,12 +62,18 @@ void MainWindow::UpdateRender() {
     }
 }
 
-void MainWindow::AddParticle() {
-    Particle *newParticle = new Particle();
-    this->Particles.push_back(newParticle);
-    scene->addItem(newParticle);
-    simulation->AddParticle(newParticle, 1e-14);
+void MainWindow::SpawnParticles() {
+    if (isPaused)
+        return;
+    for (int i = 0; i < simulation->StreamPower; ++i) {
+        Particle *newParticle = new Particle();
+        this->Particles.push_back(newParticle);
+        scene->addItem(newParticle);
+        simulation->AddParticle(newParticle);
+    }
 }
+
+void MainWindow::TogglePaused() { this->isPaused = !this->isPaused; }
 
 TIntPoint MainWindow::ToViewPoint(TPoint point) {
     TIntPoint result;

@@ -32,10 +32,13 @@ class MainWindow : public QMainWindow {
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     QTimer *timer;
+    QTimer *spawnTimer;
+    bool isPaused = false;
 
     TIntPoint ToViewPoint(TPoint point);
   private slots:
-    void AddParticle();
+    void SpawnParticles();
     void UpdateRender();
+    void TogglePaused();
 };
 #endif // MAINWINDOW_H
