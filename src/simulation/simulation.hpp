@@ -29,6 +29,8 @@ class Simulation {
     std::vector<Particle *> ParticleItems;
     TPoint AurumPosition;
 
+    int statistic[5];
+
   private:
     bool CheckInLimit(int index);
     bool NearAurum(int index);

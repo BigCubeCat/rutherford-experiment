@@ -42,5 +42,6 @@ class MainWindow : public QMainWindow {
     void TogglePaused();
     void SlotChange();
     void StreamChange();
+    void SpeedChange();
 };
 #endif // MAINWINDOW_H

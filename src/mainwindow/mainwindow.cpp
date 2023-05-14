@@ -14,16 +14,23 @@ MainWindow::MainWindow(QWidget *parent)
             &MainWindow::TogglePaused);
     connect(ui->slotSlider, &QSlider::sliderMoved, this,
             &MainWindow::SlotChange);
+    connect(ui->slotSlider, &QSlider::sliderReleased, this,
+            &MainWindow::SlotChange);
     connect(ui->countSlider, &QSlider::sliderMoved, this,
             &MainWindow::StreamChange);
-
+    connect(ui->countSlider, &QSlider::sliderReleased, this,
+            &MainWindow::StreamChange);
+    connect(ui->speedSlider, &QSlider::sliderMoved, this,
+            &MainWindow::SpeedChange);
+    connect(ui->speedSlider, &QSlider::sliderReleased, this,
+            &MainWindow::SpeedChange);
     // setup timers
     timer = new QTimer(this);
     spawnTimer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::UpdateRender);
     connect(spawnTimer, &QTimer::timeout, this, &MainWindow::SpawnParticles);
-    timer->start(10);
-    spawnTimer->start(500);
+    timer->start(100);
+    spawnTimer->start(1000);
 
     // setup scene
     this->resize(800, 600);
@@ -74,6 +81,10 @@ void MainWindow::SlotChange() {
 }
 void MainWindow::StreamChange() {
     simulation->StreamPower = ui->countSlider->value();
+}
+void MainWindow::SpeedChange() {
+    int change = ui->speedSlider->value();
+    timer->setInterval(500 - change);
 }
 
 TIntPoint MainWindow::ToViewPoint(TPoint point) {

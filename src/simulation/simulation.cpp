@@ -6,11 +6,10 @@
 
 #include <QGraphicsScene>
 
-#define LEFT_LIMIT -1e-10
-#define RIGHT_LIMIT 1e-10
+#define LEFT_LIMIT -30e-13
+#define RIGHT_LIMIT 30e-13
 #define NEAR_RADIUS 10e-15
 
-double randZeroToOne() { return rand() / (RAND_MAX + 1.); }
 double VectorSize(TPoint vec) { return sqrt(vec.x * vec.x + vec.y * vec.y); }
 TPoint Normalize(TPoint vector) {
     double len = VectorSize(vector);
