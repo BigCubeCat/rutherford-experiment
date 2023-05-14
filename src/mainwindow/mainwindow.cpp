@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowTitle(tr("Опыт Резерфорда"));
     connect(ui->pauseButton, &QPushButton::clicked, this,
             &MainWindow::TogglePaused);
+    connect(ui->wipeButton, &QPushButton::clicked, this, &MainWindow::WipeSlot);
+
     connect(ui->slotSlider, &QSlider::sliderMoved, this,
             &MainWindow::SlotChange);
     connect(ui->slotSlider, &QSlider::sliderReleased, this,
@@ -55,9 +57,13 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::UpdateRender() {
     simulation->Tick();
+    ui->progressBar0->setValue(simulation->percents[0]);
+    ui->progressBar1->setValue(simulation->percents[1]);
+    ui->progressBar2->setValue(simulation->percents[2]);
+    ui->progressBar4->setValue(simulation->percents[3]);
     for (int i = simulation->CountParticles - 1; i >= 0; --i) {
         TIntPoint pnt = ToViewPoint(simulation->Positions[i]);
-        Particles[i]->setPos(pnt.x * 10, pnt.y * 10);
+        simulation->ParticleItems[i]->setPos(pnt.x * 10, pnt.y * 10);
     }
 }
 
@@ -66,7 +72,6 @@ void MainWindow::SpawnParticles() {
         return;
     for (int i = 0; i < simulation->StreamPower; ++i) {
         Particle *newParticle = new Particle();
-        this->Particles.push_back(newParticle);
         scene->addItem(newParticle);
         simulation->AddParticle(newParticle);
     }
@@ -86,6 +91,7 @@ void MainWindow::SpeedChange() {
     int change = ui->speedSlider->value();
     timer->setInterval(500 - change);
 }
+void MainWindow::WipeSlot() { simulation->Reset(); }
 
 TIntPoint MainWindow::ToViewPoint(TPoint point) {
     TIntPoint result;

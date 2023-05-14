@@ -19,6 +19,7 @@ class Simulation {
     void UpdateParticle(int index);
     void AddParticle(Particle *particleItem);
     void RemoveParticle(int index);
+    void Reset();
     int StreamPower = 10; // count particles spawned
     double slotWidth = 100;
 
@@ -26,10 +27,13 @@ class Simulation {
     int CountParticles = 0;
     std::vector<TPoint> Directions;
     std::vector<TPoint> Positions;
+    std::vector<TPoint> StartPos;
     std::vector<Particle *> ParticleItems;
     TPoint AurumPosition;
 
-    int statistic[5];
+    int statistic[4];
+    int percents[4];
+    int countDestroyed = 0;
 
   private:
     bool CheckInLimit(int index);

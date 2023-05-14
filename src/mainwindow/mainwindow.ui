@@ -160,7 +160,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>0 &lt; α &lt; 15</string>
+                 <string>0 &lt; α &lt; 5</string>
                 </property>
                </widget>
               </item>
@@ -171,7 +171,7 @@
             <widget class="QWidget" name="horizontalWidget" native="true">
              <layout class="QHBoxLayout" name="horizontalLayout_3">
               <item>
-               <widget class="QProgressBar" name="progressBar_3">
+               <widget class="QProgressBar" name="progressBar1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -192,7 +192,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>15 &lt; α &lt; 30</string>
+                 <string>5 &lt; α &lt; 15</string>
                 </property>
                </widget>
               </item>
@@ -203,7 +203,7 @@
             <widget class="QWidget" name="horizontalWidget_2" native="true">
              <layout class="QHBoxLayout" name="horizontalLayout_4">
               <item>
-               <widget class="QProgressBar" name="progressBar_2">
+               <widget class="QProgressBar" name="progressBar2">
                 <property name="value">
                  <number>24</number>
                 </property>
@@ -212,27 +212,7 @@
               <item>
                <widget class="QLabel" name="label_3">
                 <property name="text">
-                 <string>30 &lt; α &lt; 60</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QWidget" name="horizontalWidget_3" native="true">
-             <layout class="QHBoxLayout" name="horizontalLayout_5">
-              <item>
-               <widget class="QProgressBar" name="progressBar">
-                <property name="value">
-                 <number>24</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_6">
-                <property name="text">
-                 <string>60 &lt; α &lt; 90</string>
+                 <string>15 &lt; α &lt; 60</string>
                 </property>
                </widget>
               </item>
@@ -243,7 +223,7 @@
             <widget class="QWidget" name="horizontalWidget_4" native="true">
              <layout class="QHBoxLayout" name="horizontalLayout_6">
               <item>
-               <widget class="QProgressBar" name="progressBar_4">
+               <widget class="QProgressBar" name="progressBar4">
                 <property name="value">
                  <number>24</number>
                 </property>
@@ -258,7 +238,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>90 &lt; α &lt; 180</string>
+                 <string>α &gt; 60</string>
                 </property>
                </widget>
               </item>

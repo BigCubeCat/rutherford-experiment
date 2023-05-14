@@ -26,7 +26,6 @@ class MainWindow : public QMainWindow {
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     Simulation *simulation;
-    std::vector<Particle *> Particles;
 
   private:
     Ui::MainWindow *ui;
@@ -43,5 +42,6 @@ class MainWindow : public QMainWindow {
     void SlotChange();
     void StreamChange();
     void SpeedChange();
+    void WipeSlot();
 };
 #endif // MAINWINDOW_H
