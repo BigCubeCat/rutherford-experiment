@@ -47,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
     scene->addItem(item);
     Particle *lt = new Particle();
 
-    connect(ui->addButton, &QPushButton::clicked, this,
+    connect(ui->pauseButton, &QPushButton::clicked, this,
             &MainWindow::TogglePaused);
 
     this->setWindowTitle(tr("Опыт Резерфорда"));
@@ -75,7 +75,7 @@ void MainWindow::SpawnParticles() {
 
 void MainWindow::TogglePaused() {
     this->isPaused = !this->isPaused;
-    ui->addButton->setText(tr((!isPaused) ? "pause" : "run"));
+    ui->pauseButton->setText(tr((!isPaused) ? "pause" : "run"));
 }
 
 TIntPoint MainWindow::ToViewPoint(TPoint point) {

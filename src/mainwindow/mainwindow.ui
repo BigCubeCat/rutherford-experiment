@@ -65,31 +65,6 @@
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QPushButton" name="stopButton">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pauseButton">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="playButton">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
           <spacer name="verticalSpacer_2">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -103,7 +78,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="addButton">
+          <widget class="QPushButton" name="pauseButton">
            <property name="text">
             <string>pause</string>
            </property>
