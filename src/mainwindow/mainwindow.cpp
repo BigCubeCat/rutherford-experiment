@@ -71,7 +71,7 @@ void MainWindow::AddParticle() {
 
 TIntPoint MainWindow::ToViewPoint(TPoint point) {
     TIntPoint result;
-    double scale = 5e14;
+    double scale = 1e14;
     result.x = point.x * scale;
     result.y = point.y * scale;
     return result;

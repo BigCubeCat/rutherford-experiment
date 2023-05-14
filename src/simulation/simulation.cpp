@@ -4,9 +4,9 @@
 
 #include <QGraphicsScene>
 
-#define LEFT_LIMIT -5e-13
-#define RIGHT_LIMIT 5e-13
-#define NEAR_RADIUS 1e-14
+#define LEFT_LIMIT -1e-10
+#define RIGHT_LIMIT 1e-10
+#define NEAR_RADIUS 10e-15
 
 double randZeroToOne() { return rand() / (RAND_MAX + 1.); }
 double VectorSize(TPoint vec) { return sqrt(vec.x * vec.x + vec.y * vec.y); }
@@ -107,8 +107,8 @@ void Simulation::UpdateParticle(int index) {
 }
 
 void Simulation::AddParticle(Particle *particaleItem, double xPosition) {
-    TPoint position = TPoint{-1e-15, 1e-15};
-    TPoint direction = TPoint{0, 0};
+    TPoint position = TPoint{1e-15, 30e-14};
+    TPoint direction = TPoint{0, -1e-14};
 
     Directions.push_back(direction);
     Positions.push_back(position);
