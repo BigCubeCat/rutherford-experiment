@@ -90,13 +90,6 @@
           </layout>
          </item>
          <item>
-          <widget class="QPushButton" name="resetButton">
-           <property name="text">
-            <string>reset</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <spacer name="verticalSpacer_2">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -112,7 +105,7 @@
          <item>
           <widget class="QPushButton" name="addButton">
            <property name="text">
-            <string>Add Particle</string>
+            <string>pause</string>
            </property>
           </widget>
          </item>

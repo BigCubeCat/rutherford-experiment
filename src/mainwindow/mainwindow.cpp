@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer, &QTimer::timeout, this, &MainWindow::UpdateRender);
     connect(spawnTimer, &QTimer::timeout, this, &MainWindow::SpawnParticles);
     timer->start(10);
-    spawnTimer->start(1000);
+    spawnTimer->start(100);
 
     this->resize(800, 600);
     scene = new QGraphicsScene(this); // Init graphics scene
@@ -73,7 +73,10 @@ void MainWindow::SpawnParticles() {
     }
 }
 
-void MainWindow::TogglePaused() { this->isPaused = !this->isPaused; }
+void MainWindow::TogglePaused() {
+    this->isPaused = !this->isPaused;
+    ui->addButton->setText(tr((!isPaused) ? "pause" : "run"));
+}
 
 TIntPoint MainWindow::ToViewPoint(TPoint point) {
     TIntPoint result;

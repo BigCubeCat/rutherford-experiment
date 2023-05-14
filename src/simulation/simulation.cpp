@@ -78,8 +78,9 @@ void Simulation::UpdateParticle(int index) {
 }
 
 void Simulation::AddParticle(Particle *particaleItem) {
-    TPoint position =
-        TPoint{randrange(-this->slotWidth, this->slotWidth) * 1e-15, 30e-14};
+    double yPos = (double)randrange(1, 10) / 10 * 30e-14;
+    double xPos = randrange(-this->slotWidth, this->slotWidth) * 1e-15;
+    TPoint position = TPoint{xPos, yPos};
     TPoint direction = TPoint{0, -1e-14};
 
     Directions.push_back(direction);
