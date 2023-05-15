@@ -26,8 +26,6 @@ set(PROJECT_SOURCES
 
         src/utils/utils.hpp
         src/utils/utils.cpp
-        res.qrc
-        src/assets/au.png
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
